@@ -1,0 +1,22 @@
+<!--
+  ejs(Embedded JavaScript) :
+  HTML 코드에 서버로부터 전송된 데이터를 합성하여
+  rendering을 수행할 목적으로 만들어진 특별한 view template
+-->
+<%# ejs에서 주석에 해당하는 부분
+실제 사용자에게 보여지는 view에는 나타나지 않는다
+%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <!-- 서버에서 json 형식의 모델에 담긴 데이터를 표시할 변수 -->
+    <!-- %= : HTML의 escape tag를 반영하여 표현 : &gt; 등 -->
+    <h1><%= title %></h1>
+    <!-- %@ : HTML escape tag를 반영하지 않고 표현 : &gt; 등 -->
+    <p>Welcome to <%- title %></p>
+  </body>
+</html>
