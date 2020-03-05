@@ -1,0 +1,50 @@
+extends ../index
+
+block body
+
+    script.
+        $(function() {
+            $("#btn_save").click(function() {
+                let inputName = $("#bName").val()
+                $.get("/book/name",{name: inputName},function(result) {
+                    if(result) {
+                        if(inputName == result.bName) {
+                            alert("이미 등록된 도서입니다")
+                            return false
+                        }
+                    }
+                    $("form").submit()
+                })
+            })
+            $("#btn_delete").click(function() {
+                if(confirm("정말로 삭제하시겠습니까?")) {
+                    document.location.replace("/book/delete/" + $(this).data("id"))
+                }
+            })
+            $("#btn_list").click(function() {
+                document.location.href = "/book/"
+            })
+        })
+
+    form(method="POST")
+        - var inputClasses = ["w3-input", "w3-border"]
+        .w3-container
+            input#bName(name="bName", type="text", class=inputClasses, placeholder="이름" value=book.bName)
+        .w3-container
+            input#bWriter(name="bWriter", type="text", class=inputClasses, placeholder="저자" value=book.bWriter)
+        .w3-container
+            input#bCompany(name="bCompany", type="text", class=inputClasses, placeholder="출판사" value=book.bCompany)
+        .w3-container
+            input#bYear(name="bYear", type="text", class=inputClasses, placeholder="출판연도" value=book.bYear)
+        .w3-container
+            input#bPrice(name="bPrice", type="text", class=inputClasses, placeholder="가격" value=book.bPrice)
+        .w3-container
+            input#Id(name="Id", type="text", class=inputClasses, placeholder="id" value=book._id)
+
+        -var btnClasses = ["w3-button", "w3-right", "w3-margin"]
+
+        button#btn_save(type="button", class=btnClasses).w3-blue= btnText
+        button#btn_delete(type="button", class=btnClasses, data-id = book._id).w3-red 삭제
+        button#btn_list(type="button", class=btnClasses).w3-blue 목록
+    
+    
