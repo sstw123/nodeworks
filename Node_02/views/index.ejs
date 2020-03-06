@@ -14,9 +14,9 @@
   </head>
   <body>
     <!-- 서버에서 json 형식의 모델에 담긴 데이터를 표시할 변수 -->
-    <!-- %= : HTML의 escape tag를 반영하여 표현 : &gt; 등 -->
+    <!-- %= : HTML escape tag를 반영하지 않고 표현 : &gt; 등 -->
     <h1><%= title %></h1>
-    <!-- %@ : HTML escape tag를 반영하지 않고 표현 : &gt; 등 -->
+    <!-- %- : HTML의 escape tag를 반영하여 표현 : &gt; 등 -->
     <p>Welcome to <%- title %></p>
   </body>
 </html>

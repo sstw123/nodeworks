@@ -18,7 +18,10 @@ block body
             })
             $("#btn_delete").click(function() {
                 if(confirm("정말로 삭제하시겠습니까?")) {
-                    document.location.replace("/book/delete/" + $(this).data("id"))
+                    //document.location.replace("/book/delete/" + $(this).data("id"))
+                    document.location.replace("/book/delete/" + "#{book._id}")
+                    // router에서 보낸 json 데이터를 js 코드에 포함할 때는 "#{book._id}" (큰 따옴표로 묶어주기)
+                    // 
                 }
             })
             $("#btn_list").click(function() {
