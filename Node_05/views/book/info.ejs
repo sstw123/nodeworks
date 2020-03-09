@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include("book/header_nav") %>
+
+<script>
+    $(function() {
+        $(".btn_update").click(function() {
+            document.location.href = "/book/update/" + "<%= book._id %>"
+        })
+
+        $(".btn_delete").click(function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                document.location.href = "/book/delete/" + "<%= book._id %>"
+            }
+        })
+    })
+</script>
+</head>
+<body>
+    <div><%= book.bTitle %></div>
+    <div><%= book.bWriter %></div>
+    <div><%= book.bComp %></div>
+    <div><%= book.bPrice %></div>
+    <div>
+        <button class="btn_update" type="button">수정</button>
+    </div>
+    <div>
+        <button class="btn_delete" type="button">삭제</button>
+    </div>
+</body>
+</html>

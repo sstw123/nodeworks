@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+
+    script.
+        $(function() {
+            $(".btn-insert").click(function() {
+                document.location.href = "/book/insert"
+            })
+            $(".book_tr").click(function() {
+                document.location.href = "/book/update/" + $(this).data("id")
+            })
+        })
+
+    table.w3-table-all
+        tr
+            th No
+            th 도서명
+            th 저자
+            th 출판사
+            th 가격
+        each book, index in books
+            tr(data-id=book._id).book_tr
+                td= index + 1
+                td= book.bTitle
+                td= book.bWriter
+                td= book.bComp
+                td= book.bPrice
+                
+    button.w3-button.w3-blue.w3-right.btn-insert 추가

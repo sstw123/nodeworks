@@ -8,10 +8,7 @@ var logger = require('morgan');
 // DB 연결하기(app.use 이전에 설정하면 되긴 하지만 다른 곳에서 사용할 수 있기 때문에 최상단 미들웨어 설정부분에 설정하기로 한다)
 // 1. mongoose 디펜던시 불러오기
 var mongoose = require("mongoose")
-// 2. mongodb URL과 스키마 설정
-mongoose.connect("mongodb://localhost/mydb")
-
-// 3. mongoDB와 연결하여 기능 수행시 정상수행, 오류발생 등 감시를 위한 객체 선언
+// 2. mongoDB와 연결하여 기능 수행시 정상수행, 오류발생 등 감시를 위한 객체 선언
 var dbConn = mongoose.connection
 // 3. DB Conn 이벤트 핸들러 설정
 // 3-1. 연결 에러 발생시 실행할 메소드 설정
@@ -30,6 +27,8 @@ dbConn.once("disconnected", function() {
 dbConn.once("connected", function() {
   console.log("MongoDB Connected !!")
 })
+// 4. mongodb URL과 스키마 설정
+mongoose.connect("mongodb://localhost/mydb")
 
 
 var indexRouter = require('./routes/index');

@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  /*border:1px solid black;*/
+}
+header {
+  text-align: center;
+  padding: 40px;
+}
+nav {
+  width: 978px;
+  margin: 0 auto;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+}
+nav ul li {
+  width: 100px;
+  text-align: center;
+  padding: 14px 0px;
+}
+section.body {
+  width: 978px;
+  margin: 0 auto;
+}

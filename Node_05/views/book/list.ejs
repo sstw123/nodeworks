@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+<script>
+    $(function() {
+        $("tbody tr").click(function() {
+            let id = $(this).data("id")
+            document.location.href = "/book/info/" + id
+        })
+
+        $(".btn_add").click(function() {
+            document.location.href = "/book/insert"
+        })
+    })
+</script>
+<body>
+    <%- include("book/header_nav") %>
+    <table>
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>저자</th>
+                <th>출판사</th>
+                <th>가격</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% bookList.forEach(function(book) { %>
+            <tr data-id="<%= book._id %>">
+                <td><%= book.bTitle %></td>
+                <td><%= book.bWriter %></td>
+                <td><%= book.bComp %></td>
+                <td><%= book.bPrice %></td>
+            </tr>
+            <% }) %>
+        </tbody>
+        
+    </table>
+    <div>
+        <button class="btn_add" type="button">추가</button>
+    </div>
+</body>
+
+</html>

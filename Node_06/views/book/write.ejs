@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include("../include_head") %>
+    <script>
+        $(function() {
+            $(".btn-delete").click(function() {
+                if(confirm("삭제할까요?")) {
+                    document.location.replace("/book/delete/<%= book._id %>")//ejs는 라우터에서 받은 데이터를 입력하려면 <%= %> 으로 넣어준다
+                }
+            })
+
+            $(".btn-list").click(function() {
+                document.location.href = "/book"
+            })
+        })
+    </script>
+</head>
+<body>
+    <form method="POST" class="w3-container w3-padding">
+        <fieldset class="w3-border-blue">
+            <legend>
+                <% if(formTitle == "UPDATE") { %>
+                    <h1>도서정보 수정</h1>
+                <% } else if(formTitle == "INSERT") { %>
+                    <h1>도서정보 추가</h1>
+                <% } %>
+            </legend>
+
+            <div>
+                <label class="w3-text-blue" for="bTitle"><b>도서명</b></label>
+                <input id="bTitle" class="w3-input w3-border" name="bTitle" type="text" value="<%= book.bTitle %>">
+            </div>
+
+            <div>
+                <label class="w3-text-blue" for="bWriter"><b>저자</b></label>
+                <input id="bWriter" class="w3-input w3-border" name="bWriter" type="text" value="<%= book.bWriter %>">
+            </div>
+
+            <div>
+                <label class="w3-text-blue" for="bComp"><b>출판사</b></label>
+                <input id="bComp" class="w3-input w3-border" name="bComp" type="text" value="<%= book.bComp %>">
+            </div>
+
+            <div>
+                <label class="w3-text-blue" for="bPrice"><b>가격</b></label>
+                <input id="bPrice" class="w3-input w3-border" name="bPrice" type="text" value="<%= book.bPrice %>">
+            </div>
+
+            <div>
+                <button class="w3-button w3-blue w3-right">저장</button>
+            </div>
+
+            <% if(formTitle == "UPDATE") { %>
+                <button class="w3-button w3-red w3-right btn-delete" type="button">삭제</button>
+                <button class="w3-button w3-green w3-right btn-list" type="button">목록</button>
+            <% } %>
+        </fieldset>
+    </form>
+</body>
+</html>
