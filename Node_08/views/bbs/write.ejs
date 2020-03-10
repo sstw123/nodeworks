@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include("../include_head") %>
+    <script>
+        $(function() {
+            $("#b_text").summernote({
+                lang: "ko-KR",
+                width: "100%",
+                height: "300px"
+            })
+        })
+    </script>
+</head>
+<body>
+    <%- include("../include_header") %>
+    <section class="container-fluid">
+        <form method="POST">
+            <div class="w3-container">
+                <label class="w3-text-blue" for="b_writer">작성자</label>
+                <input id="b_writer" class="w3-input w3-border" name="b_writer" value="<%- bbs.b_writer %>">
+            </div>
+            <div class="w3-container">
+                <label class="w3-text-blue" for="b_subject">제목</label>
+                <input id="b_subject" class="w3-input w3-border" name="b_subject" value="<%- bbs.b_subject %>">
+            </div>
+            <div class="w3-container">
+                <label class="w3-text-blue" for="b_text">내용</label>
+                <textarea id="b_text" class="w3-input w3-border" name="b_text"><%- bbs.b_text %></textarea>
+            </div>
+            <div class="w3-container">
+                <button class="w3-button w3-blue w3-right w3-margin">저장</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>
