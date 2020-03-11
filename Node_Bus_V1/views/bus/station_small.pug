@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+    script(src="/javascripts/busStation.js")
+    section.container-fluid
+        table.w3-table.w3-table-all
+            tr
+                th No
+                th 정류장 ID
+                th 정류장
+                th 다음 정류장
+                th 경도, 위도
+            each station in stationList
+                tr.bus_tr(data-id=station.BUSSTOP_ID)
+                    td #{station.STATION_NUM}
+                    td #{station.BUSSTOP_ID}
+                    td #{station.BUSSTOP_NAME}
+                    td #{station.NEXT_BUSSTOP}
+                    td #{station.LONGITUDE}, #{station.LATITUDE}
+        include ../page_list
+
+    p
+    br
+    p
+    section#bustime.container-fluid

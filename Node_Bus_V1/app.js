@@ -3,39 +3,33 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var bodyParser = require("body-parser")
 
-// ./models 폴더에 index.js 파일이 있는지 찾아서
-// 있다면 require하여 사용할 수 있도록 준비
-var sequelize = require("./models").sequelize
+var mongoose = require("mongoose")
+mongoose.connect("mongodb://localhost/mydb")
+
+var db = mongoose.connection
+db.once("open", function() {
+  console.log("--- MongoDB Open ---")
+})
+db.on("error", function() {
+  consele.log("--- MongoDB ERROR ---")
+})
+
+var config = require("./config")
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var bbsRouter = require("./routes/bbsRouter")
 
 var app = express();
 
-// db에 연결하기
-sequelize.sync()
+var busRouter = require("./routes/busRouter")(app, config)
+// 위에서 생성한 config 객체를 router에게 전달하기
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
-
-/*
-express의 json과 urlencoded는 대용량 Text(데이터)를 
-json 구조나 post로 전송할때 문제를 일으켜서
-body-parser의 도움을 받아 대용량 Text를 업로드 할수 있도록 한다
-*/
-app.use(bodyParser.json({limit:"20mb"}))
-app.use(bodyParser.urlencoded({
-  limit : "20mb",
-  extended : true,
-  parameterLimit : 10000000
-}))
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -43,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/bbs", bbsRouter)
+app.use("/bus", busRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

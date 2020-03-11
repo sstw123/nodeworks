@@ -1,0 +1,13 @@
+table.w3-table-all
+    tr
+        th 노선번호
+        th 현재위치
+        th 도착예정시간
+        th 남은 정류장 수
+    
+    each bus in bustimeList
+        tr
+            td #{bus.LINE_NAME}
+            td #{bus.BUSSTOP_NAME}
+            td #{bus.REMAIN_MIN} 분
+            td #{bus.REMAIN_STOP} 정류장 남음
