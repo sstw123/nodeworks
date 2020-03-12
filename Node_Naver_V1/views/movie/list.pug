@@ -1,0 +1,59 @@
+extends ../layout
+
+block content
+    style.
+        section.movie {
+            display: flex;
+            margin-left: 550px;
+            margin-top: 50px;
+            width: 50%;
+        }
+
+        article.movie-img {
+            width: 100px;
+            height: 140px;
+            margin-right: 20px;
+        }
+        article.movie-img img {
+            width: 100px;
+            height: 140px;
+            margin: 0 auto;
+        }
+
+        article.movie-info {
+            width: auto;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        a.title {
+            color: black;
+            font-size: large;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.title:hover {
+            color: blue;
+            cursor: pointer;
+        }
+        .movie-info p {
+            font-size: small;
+            margin: 10px 0;
+        }
+    // HTML 코드에 보이는 주석
+    //- HTML 코드에 보이지 않는 주석
+    each movie in movieList
+        //- !{변수명} : html tag를 적용해서 표시
+        //- #{변수명} : html tag를 적용하지 않고 표시
+        section.movie
+            article.movie-img
+                if movie.image == ""
+                    img(src="https://ssl.pstatic.net/static/movie/2012/06/dft_img77x110_1.png")
+                else
+                    img(src=movie.image)
+            article.movie-info
+                a(href=movie.link, target="_blank").title !{movie.title}
+                p !{movie.subtitle}
+                p 감독 #{movie.director} #{movie.pubDate}년 개봉 | 평점 #{movie.userRating}
+                p 출연 #{movie.actor}

@@ -62,7 +62,7 @@ RemoteSystemsTempFiles/
 
 # mySec File
 
-naver_secret.js
+naver_secret.*
 dataGoKr.*
 
 # ETC

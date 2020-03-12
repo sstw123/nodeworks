@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  script(src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appkey=" + tmap_api)
+  style.
+    #map_div {
+      margin: 20px auto;
+    }
+  script.
+    $(function() {
+      // 마커를 찍기 위한 위도, 경도 데이터 배열로 받기
+      let marketList = !{JSON.stringify(stores)}
+
+      // 검색한 데이터 중 가장 마지막 데이터의 좌표
+      let initLat = marketList[ marketList.length - 1].lat
+      let initLng = marketList[ marketList.length - 1].lng
+
+      var map = new Tmapv2.Map("map_div",
+        {
+          width: "90%",
+          height: "500px",
+          center: new Tmapv2.LatLng(initLat, initLng),
+          zoom: 15
+        })
+
+      let remain = {"plenty":"100개 이상", "some":"30~99개", "few":"2~29개", "empty":"없음", null:"알 수 없음"}
+      let marker = {}
+      // 마커 찍기
+      marketList.forEach(function(market, index) {
+        marker[index] = new Tmapv2.Marker({
+          position: new Tmapv2.LatLng(market.lat, market.lng),
+          map : map,
+          title : market.name + "<br>"
+                + "재고: " + remain[market.remain_stat] + "<br>"
+                + market.addr
+          
+        })
+
+      })
+
+    })
+  h1 마스크 구매처 검색 시스템 V1
+  #map_div.container-fluid
+
+  .market_list.container-fluid
+    table.w3-table-all
+      tr
+          th 이름
+          th 주소
+          th 경도
+          th 위도
+          th 재고
+      -var remain = {"plenty":"100개 이상", "some":"30~99개", "few":"2~29개", "empty":"없음", null:"알 수 없음"}
+      each market in stores
+        tr
+          td= market.name
+          td= market.addr
+          td= market.lat
+          td= market.lng
+          if market.remain_stat == "plenty"
+            td.w3-text-green= remain[market.remain_stat]
+          else
+            td= remain[market.remain_stat]
+      
