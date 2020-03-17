@@ -1,0 +1,23 @@
+nav.main-menu ul {
+  background-color: blue;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav.main-menu ul li {
+  display: inline-block;
+}
+
+nav.main-menu ul li a {
+  display: inline-block;
+  color: white;
+  background-color: blue;
+  text-decoration: none;
+  padding: 8px;
+}
+
+nav.main-menu ul li a:hover {
+  background-color: darkgray;
+  color: black;
+}
