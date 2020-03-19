@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script type="text/javascript">
+    // 첫번째 p 태그가 클릭되었을때 반응할 이벤트 핸들러
+    function myClick() {
+      alert("나는 첫번째 p 태그 입니다")
+    }
+
+    function myClick2(text) {
+      alert("나는 " + text + "입니다")
+    }
+
+    // var myClick3 = function(text) {} :
+    // - java 코드에서는 function(text) 라는 메소드를 호출하고 그 리턴값을 myClick3에 담는다는 뜻이지만
+    // - js 코드에서는 function(text) 라는 메소드 자체를 myClick3에 담는다(= myClick3이라는 이름으로 함수를 선언)
+    // - myClick3("값") 을 호출하면 함수의 매개변수 순서대로 받을 수 있다
+    var myClick3 = function() {
+      alert("나는 " + text + "입니다")
+    }
+
+    // ES5부터 사용되기 시작한 화살표 함수
+    var myClick4 = (text1, text2) => {
+      alert("alert(text1 + text2) " + text1 + " " + text2)
+    }
+  </script>
+  <style>
+    p {
+      border: 1px solid blue;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <p onClick="myClick()">나는 첫번째 p태그 입니다</p>
+  <p onClick="myClick2('홍길동')">나는 두번째 p태그 입니다</p>
+  <p onClick="myClick3('세번째 p 태그')">나는 세번째 p태그 입니다</p>
+  <p onClick="myClick4('여기는 첫번째 값', '여기는 두번째 값')">나는 네번째 p태그 입니다</p>
+</body>
+</html>

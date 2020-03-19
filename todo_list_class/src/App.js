@@ -59,6 +59,9 @@ class App extends Component {
   };
 
   handleToggle = id => {
+    // this : 화살표 함수로 되어있는 이벤트 핸들러는 this = 현재 컴포넌트
+    // this = App.js 의 context(thread의 모든 정보를 담고 있는 것)
+    
     // 1. this.state에 있는 todoList를 prop으로 만들기
     const { todoList } = this.state;
 

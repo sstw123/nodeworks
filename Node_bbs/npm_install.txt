@@ -1,0 +1,23 @@
+npm i cookie-parser
+npm i debug
+npm i express
+npm i body-parser
+npm i http-errors
+npm i pug
+npm i morgan
+npm i mongoose
+npm i request
+npm i express-paginate
+npm i multer
+npm i moment
+npm i moment-timezone
+npm i cors
+npm i
+
+# mongoose : MongoDB 연결
+# request : 외부 API 활용을 위한 미들웨어
+# express-paginate : 페이지네이션 구현 미들웨어
+# multer : Node.js에서 사용하는 파일 업로드 미들웨어
+# moment : Node.js에서 시간 관련 모듈
+# moment-timezone : moment의 서브 모듈
+# cors : CORS 정책에 대한 Node.js 서버 설정을 하기 위한 모듈
