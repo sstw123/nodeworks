@@ -7,13 +7,13 @@ moment.tz.setDefault("Asia/Seoul")
 var cors = require("cors")
 
 var app = express();
-app.use(cors())
+
 var corsOption = {
     origin : "http://localhost:3000",
     optionsSuccessStatue : 200// IE 버전 때문에 생기는 문제 제거
   }
 
-router.get("/", cors(corsOption), (req, res) => {
+router.get("/", (req, res) => {
     // CORS 모듈 없이 CORS 정책을 허용하기 위한 설정
     // CORS 정책을 허용할 모든 라우터에 하나하나 설정을 해주어야 한다
     // res.header("Access-Control-Allow-Origin", "*")
@@ -25,20 +25,7 @@ router.get("/", cors(corsOption), (req, res) => {
     })
 })
 
-router.get("/insert", cors(corsOption), (req, res) => {
-
-    var bbs = new bbsVO({
-        b_date : moment().format("YYYY-MM-DD"),
-        b_time : moment().format("HH:mm:ss"),
-        b_title : req.query.b_title
-    })
-
-    bbs.save((err, data) => {
-        res.json(data)
-    })
-})
-
-router.post("/insert", cors(corsOption), (req, res) => {
+router.post("/insert", (req, res) => {
     req.body.b_date = moment().format("YYYY-MM-DD")
     req.body.b_time = moment().format("HH:mm:ss")
 
@@ -46,6 +33,27 @@ router.post("/insert", cors(corsOption), (req, res) => {
 
     bbs.save((err, data) => {
         res.json(data)
+    })
+})
+
+router.put("/", (req, res) => {
+    console.log(req.body)
+
+    bbsVO.update({_id : req.body._id}, {$set : req.body})
+    .exec((err, result) => {
+        res.json(result)
+    })
+})
+
+router.delete("/", (req, res) => {
+    console.log("바디값 :" , req.body)
+    bbsVO.deleteOne({_id : req.body._id})
+    .exec(function(err, data) {
+        if(err) {
+            res.json(err)
+        } else {
+            res.json(data)
+        }
     })
 })
 

@@ -21,10 +21,6 @@ db.once("open", () => {
 })
 
 
-
-
-
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var bbsRouter = require('./routes/bbsRouter');
