@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MessageProvicer from "../provider/MessageProvider"
+import MProvider from "../provider/MessageProvider"
 import ProSub1 from "./ProSub1"
 import ProSub2 from "./ProSub2"
 
@@ -32,10 +32,10 @@ class ProMain extends Component {
                 <h2>나는 Main 입니다</h2>
                 <p>{this.state.message}</p>
                 {/* ProMain에 선언된 state.message를 하위 컴포넌트에 전달하기 */}
-                <MessageProvider.Provider value={this.state}>
-                    <ProSub1 message={this.state.message}/>
-                    <ProSub2 message={this.state.message} changeMessage={this.changeMessage}/>
-                </MessageProvider.Provider>
+                <MProvider.Provider value={this.state}>
+                    <ProSub1 />
+                    <ProSub2 />
+                </MProvider.Provider>
             </div>
         );
     }
