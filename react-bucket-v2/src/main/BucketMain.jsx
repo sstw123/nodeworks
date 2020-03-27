@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BucketInsert from "./BucketInsert"
 import BucketList from "./BucketList"
+import BucketContext from "../provider/BucketProvider"
 
 class BucketMain extends Component {
     id = 0;
@@ -14,12 +15,18 @@ class BucketMain extends Component {
                 b_start_date : "2020-03-20",
                 b_end_date : "",
                 b_check : false,
-                b_cancle : false
+                b_cancel : false
             }
-        ]
+        ],
+        changeFlag : (id) => this.changeFlag(id),
+        bucket_add : (b_title) => this.bucket_add(b_title),
+        bucket_update : (id, b_title) => this.bucket_update(id, b_title),
+        bucket_complete : (id, bucket_end_date) => this.bucket_complete(id, bucket_end_date),
+        toggleCancel : (id) => this.toggleCancel(id)
     }
 
     // 현재 컴포넌트가 모두 연결되고 화면에 나타난 직후 : rendering 바로 직전
+    // localStorage에서 불러오는 방법
     componentDidMount() {
         // JS에서 접근 가능한 localStorage의 bucketList(키)를 가져온다
         const strBucketList = localStorage.bucketList
@@ -36,6 +43,7 @@ class BucketMain extends Component {
     }
 
     // 화면에 rendering이 끝나고 데이터가 변경되어 다시 렌더링 되려고 할 때
+    // localStorage에 저장하는 방법
     componentDidUpdate(preProps, preState) {
         // JSON.stringify() : JSON 객체를 문자열로 변경
         // 데이터가 변경되어 컴포넌트가 렌더링되는 순간 이전의 state와 현재 state 값 비교
@@ -99,7 +107,7 @@ class BucketMain extends Component {
             b_title : b_title,
             b_end_date : "",
             b_check : false,
-            b_cancle : false
+            b_cancel : false
         }
         this.setState({
             // id가 ++this.id
@@ -121,7 +129,44 @@ class BucketMain extends Component {
                     bucket.b_id === id ? {...bucket, b_title : b_title} : bucket
             )
         })
-         
+    }
+
+    // 완료버튼을 누르면 bucketList를 map으로 반복하면서 id값과 일치하는 항목을 찾고 b_end_date 변경하기
+    bucket_complete = (id, b_end_date) => {
+        const {bucketList} = this.state
+        this.setState({
+            bucketList : bucketList.map(
+                (bucketItem) => {
+                    // id값과 일치하는 데이터가 있으면
+                    if(bucketItem.b_id === id) {
+                        const date = new Date()
+                        // 현재 항목의 b_end_date 값이 ""라면 현재 날짜로, 다른 값이 있다면 ""로 만들기(비우기)
+                        const end_date = bucketItem.b_end_date === "" ? date : ""
+
+                        return {...bucketItem, b_end_date : end_date}
+                    } else {
+                        // map에서 찾은 다른 항목들은 그대로 bucketList에 담기
+                        // 이게 없다면 id값과 같은 값만
+                        return bucketItem;
+                    }
+                }
+            )
+        })
+    }
+
+    toggleCancel = (id) => {
+        const {bucketList} = this.state
+        this.setState({
+            bucketList : bucketList.map(
+                (bucketItem) => {
+                    if(bucketItem.b_id === id) {
+                        return {...bucketItem, b_cancel : !bucketItem.b_cancel}
+                    } else {
+                        return bucketItem;
+                    }
+                }
+            )
+        })
     }
 
     // React lifeCycle 메소드
@@ -137,8 +182,10 @@ class BucketMain extends Component {
     render() {
         return (
             <div>
-                <BucketInsert bucket_add={this.bucket_add} />
-                <BucketList bucket_update={this.bucket_update} bucketList={this.state.bucketList} changeFlag={this.changeFlag} />
+                <BucketContext.Provider value={this.state}>
+                    <BucketInsert />
+                    <BucketList />
+                </BucketContext.Provider>
             </div>
         );
     }

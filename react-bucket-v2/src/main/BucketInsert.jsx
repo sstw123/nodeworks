@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import BucketContext from "../provider/BucketProvider"
 
 class BucketInsert extends Component {
     // input box를 사용하는 컴포넌트에서 사용자가 입력한 문자열을 임시로 담고 있을 변수 선언
     state = {
         bucket_title : ""
     }
+
+    // static contextType : 상위 컴포넌트에서 전달된 Context.Provider를 사용하는 변수 선언
+    // 안에 있는 state 변수와 handler method 등을 사용할 수 있다
+    static contextType = BucketContext
 
     // 현재 컴포넌트에 선언된 state.bucket_title 변수에 사용자의 입력 문자열을 담는 역할을 수행
     // 여기에 문자열을 담아도 다른 컴포넌트에 문자열이 전파되지는 않는다
@@ -22,7 +27,7 @@ class BucketInsert extends Component {
     // BucketMain에서 전달받은 이벤트 핸들러에게 this.state.bucket_title 값을 전달하여
     // 전체 컴포넌트가 접근 가능한 Main의 배열에 추가하기
     handleKeyPress = (e) => {
-        const {bucket_add} = this.props
+        const {bucket_add} = this.context
         const {bucket_title} = this.state
         if(e.key === "Enter") {
             if(bucket_title == "") {
@@ -44,6 +49,7 @@ class BucketInsert extends Component {
     // 2. value 속성에 state 변수 지정(input box는 readonly 상태로 변한다)
     // 3. 사용자의 입력을 받아서 state 변수에 저장할 수 있도록 onChange 이벤트 핸들러 만들기
     render() {
+
         return (
             <section className="w3-container-fluid">
                 <div className="w3-form-control w3-margin">
