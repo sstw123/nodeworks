@@ -1,0 +1,39 @@
+
+.main_content {
+    display: flex;
+    height: 1000px;
+    flex-flow: column wrap;
+    align-content: center;
+}
+
+.main_article {
+    margin: 30px;
+}
+
+.m1, .m2 {
+    width: 400px;
+    height: 400px;
+}
+
+.m3 {
+    width: 400px;
+    height: 862px;
+}
+
+.main_article p {
+    display: flex;
+    padding: 5px 0;
+    border-bottom: 1px solid #aaa;
+}
+.main_article b {
+    margin-left: 20px;
+    font-size: large;
+}
+.view_more {
+    font-size: small;
+    color: #555;
+    margin-left: auto;
+    margin-right: 20px;
+    align-self: center;
+    cursor: pointer;
+}
