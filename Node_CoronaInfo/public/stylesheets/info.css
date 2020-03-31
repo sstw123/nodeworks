@@ -1,0 +1,21 @@
+section.info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.info_article {
+    margin: 30px;
+    width: 400px;
+}
+
+.info_article h4 {
+    border-bottom: 1px solid #aaa;
+    padding: 5px;
+}
+
+.info_article p {
+    line-height: 21px;
+    padding: 5px;
+    font-size: small;
+}

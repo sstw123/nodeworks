@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+
+    link(rel='stylesheet', href='/stylesheets/main_content.css')
+    script(src="/javascripts/main_content.js")
+
+    section.main_content
+        article.main_article.m1
+            p
+                b 질병정보
+                span.view_more.info 더보기
+
+        article.main_article.m2
+            p
+                b 확진자 이동경로
+                span.view_more.route 더보기
+
+        article.main_article.m3
+            p
+                b 통계
+                span.view_more.statistics 더보기
