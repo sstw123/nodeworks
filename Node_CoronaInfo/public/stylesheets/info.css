@@ -19,3 +19,19 @@ section.info {
     padding: 5px;
     font-size: small;
 }
+
+.edit {
+    cursor: pointer;
+}
+
+.info_form {
+    display: none;
+}
+
+.info_form.active {
+    display: block;
+}
+
+.info_form.inactive {
+    display: none;
+}
