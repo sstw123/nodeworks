@@ -9,12 +9,12 @@ section.info {
     width: 400px;
 }
 
-.info_article h4 {
+.title p {
     border-bottom: 1px solid #aaa;
     padding: 5px;
 }
 
-.info_article p {
+p.text {
     line-height: 21px;
     padding: 5px;
     font-size: small;
