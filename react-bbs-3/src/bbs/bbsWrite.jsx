@@ -9,6 +9,9 @@ class bbsWrite extends Component {
         bbsText : ""
     }
     // axios를 사용하여 서버로 데이터 전송
+    // Router로 감싸진 상태의 컴포넌트들은 props로 match, location, history 와 같은 객체를 상위 Router로 전달받는다
+    // match, location은 보통 query 문자열을 통하여 변수 값을 전달받을 때 사용하고
+    // history는 안에 있는 push() 메소드를 사용하여 어떤 일을 수행한 후 원하는 path로 점프하는 코드를 수행할 수 있다(redirect 처럼)
     bbsInsert = () => {
         let formData = new FormData()
         formData.append("bbsDate", this.state.bbsDate)
@@ -16,8 +19,9 @@ class bbsWrite extends Component {
         formData.append("bbsTitle", this.state.bbsTitle)
         formData.append("bbsText", this.state.bbsText)
 
-        axios.post("http://localhost:8080/bbs/api/insert", formData)
-        .then((result) => console.log(result))
+        // this.props 안에 들어있는 history 밑의 push()를 이용하면 redirect처럼 사용할 수 있다
+        axios.post("http://localhost:8080/bbs/api/save", formData)
+        .then((result) => { this.props.history.push("/") } )
         .catch((error) => console.log(error))
     }
 

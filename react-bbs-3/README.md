@@ -1,68 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 이벤트 핸들러 등록방식
+* 먼저 이벤트 핸들러로 사용할 함수를 클래스에 선언한다
+* handleEvent = (매개변수) => { 코드 }
 
-## Available Scripts
+* 이벤트 핸들러 등록
+* 1. onClick={ this.handleEvent }
+* 2. onClick={ this.handleEvent("함수") }
+* 차이점
+* 1번은 괄호가 없는 객체이기 때문에 이벤트로 등록할 수 있다
+* 2번은 괄호가 있는 함수이기 때문에 각 컴포넌트가 렌더링되는 동안 이벤트로 등록되지 않고 선언된 개수만큼 호출하여 자동으로 실행한다
 
-In the project directory, you can run:
+* 2번 코드(이벤트 핸들러에게 어떤 값을 전달하여 그 값을 핸들러 코드 내에서 사용하려고 한다면
+* 3. onClick={ (e) => this.handleEvent("함수") } 형식으로
+* 익명의 이벤트 핸들러를 등록하고
+* (e) => { }
+* 이 익명 이벤트 핸들러에서 함수를 호출하도록 코드를 작성해주어야 한다
+* (e) => { 함수(매개변수) }
 
-### `yarn start`
+* 이렇게 등록하면 렌더링하는 동안 (e) => { }의 익명 함수만 이벤트 핸들러로 등록
+* 이때 내부의 코드는 모두 무시된다
+* 모든 렌더링이 끝나고 이벤트를 실행하게 되면 이벤트 핸들러가 자신이 포함하고 있는 함수를 호출하여 원하는 코드를 실행하게 된다
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## withRouter
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+* withRouter
+* BrowserRouter 바로 아래 Route로 설정된 컴포넌트(1세대)가 아닌 그 자손 컴포넌트
+* 또는 BrowserRouter 밖에 있는 컴포넌트는
+* BrowserRouter의 this.props를 직접 전달받지 못한다
 
-### `yarn test`
+* 1대 자손이 아닌 컴포넌트에서 this.props를 사용하려면 객체를 withRouter로 메소드로 wrapping을 해야 한다
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* 1. import { withRouter } from "react-router-dom" : import하기
+* 2. export default withRouter(bbsItem) : export default 클래스명을 export default withRouter(클래스명)으로 감싸주기
