@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+    form(method="POST", enctype="multipart/form-data")
+        .form-group
+            label(for="pTitle") 제목
+            input#pTitle.form-control(name="pTitle", placeholder="제목", value=photo.pTitle)
+        .form-group
+            label(for="pText") 사진설명
+            input#pText.form-control(name="pText", placeholder="사진설명", value=photo.pText)
+        .form-group
+            label(for="pFile") 파일
+            input#pFile.form-control(name="pFile", placeholder="이미지 파일", type="file", accept=".gif, .jpg, .jpeg, .png", value=photo.pOriginalName)
+            input#pFileImage.form-control(placeholder="모든 이미지 파일", type="file", accept="image/*", value=photo.pOriginalName)
+        .form-group.text-right
+            button.btn.btn-primary 저장

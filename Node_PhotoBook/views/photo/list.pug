@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    script.
+        $(function() {
+            $(".image-view").click(function() {
+                let id = $(this).data("id")
+                document.location.href = "/photo/details/" + id
+            })
+            
+            $(".btn").click(function() {
+                document.location.href = "/photo/upload"
+            })
+        })
+    
+    section.container.row
+        each photo, index in photos
+            .card.image-view(data-id=photo._id)
+                .card-header= photo.pTitle
+                img.card-img-top(src="/images/" + photo.pPhotoName, style="width:300px; height:300px;")
+                .card-body= photo.pText
+
+    section.container.text-right
+        button.btn.btn-primary 글쓰기

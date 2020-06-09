@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+    script.
+        $(function() {
+            $("button").click(function() {
+                let label = $(this).text()
+                if(label == "목록") {
+                    document.location.href = "/photo"
+                } else if (label == "수정") {
+                    document.location.href = "/photo/update/#{photo._id}"
+                } else if (label == "삭제") {
+                    if(confirm("정말 삭제할까요?")) {
+                        document.location.href = "/photo/delete/#{photo._id}"
+                    }
+                }
+            })
+        })
+
+    section.container.p-5
+        table.table.table-all
+            tr
+                th(style="min-width: 100px") 제목
+                td #{photo.pTitle}
+            tr
+                th 사진설명
+                td #{photo.pText}
+            tr
+                th 이미지
+                td
+                    img(src="/images/" + photo.pPhotoName, style="width: 600px")
+    
+    section.container.p-5.text-right
+        button.btn.btn-primary 수정
+        button.btn.btn-danger 삭제
+        button.btn.btn-success 목록
