@@ -21,7 +21,7 @@ router.get("/", function(req, res) {
     // render() 함수는 view 파일과 데이터를 렌더링하여 web browser에게 html로 전송한다
     photoVO.find()
     .exec(function(err, data) {
-        res.render("photo/list", {photos: data})
+        res.render("photo/list", {photos : data})
     })
     
 })

@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+    script.
+        $(function() {
+            $("#btn_write").click(function() {
+                $("#write_form").submit()
+            })
+
+            $("#btn_list").click(function() {
+                document.location.href = "/bbs"
+            })
+        })
+    section.container.m-5.mx-auto
+        form#write_form(method="POST")
+            .form-group
+                label(for="b_title")
+                input#b_title.form-control(name="b_title", placeholder="제목")
+            .form-group
+                label(for="b_writer")
+                input#b_writer.form-control(name="b_writer", placeholder="작성자")
+            .form-group
+                label(for="b_content")
+                textarea#b_content.form-control(name="b_content", cols="30", rows="10")
+            .btn_box.text-right
+                button#btn_write.btn.btn-primary.m-1(type="button") 저장
+                button#btn_list.btn.btn-success.m-1(type="button") 목록
