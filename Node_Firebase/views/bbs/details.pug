@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+    script.
+        $(function() {
+            $("button").click(function() {
+                let data_btn = $(this).data("btn")
+
+                if(data_btn == "list") {
+                    document.location.href = "/bbs"
+                } else if(data_btn == "update") {
+                    document.location.href = "/bbs/update/#{bbs.seq}"
+                } else if(data_btn == "delete") {
+                    if(confirm("정말 삭제하시겠습니까?")) {
+                        document.location.href = "/bbs/delete/#{bbs.seq}"
+                    }
+                }
+            })
+        })
+        
+    section.container
+        div.card
+            div.card-title #{bbs.b_title}
+            div.card-body= bbs.b_text
+            div.card-footer= bbs.b_writer
+    section.container.text-right
+        button.btn.btn-success.m-2(data-btn="list") 목록
+        button.btn.btn-primary.m-2(data-btn="update") 수정
+        button.btn.btn-danger.m-2(data-btn="delete") 삭제

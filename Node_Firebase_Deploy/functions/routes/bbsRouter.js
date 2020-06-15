@@ -88,9 +88,7 @@ router.post("/write", (req, res) => {
 
   // seq값을 받지 않은 경우(새 글인 경우)
   // 새로운 seq를 생성해서 insert 상태로 만들고 날짜와 시각을 생성하여 data (req.body)에 추가
-
-  // js에서 "", undefined 등의 값은 boolean 연산에서 false로 인식된다
-  if(!seq) {
+  if(seq == "") {
     // moment를 사용하여 현재 날짜를 년-월-일 형태의 문자열만 가져오기
     let bDate = moment().format("YYYY-MM-DD")
     let bTime = moment().format("HH:mm:ss")
