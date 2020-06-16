@@ -4,8 +4,8 @@
 * Hosting : 홈페이지(static web)를 외부에서 접근할 수 있도록 만들어주는 서비스
 * Firebase functions : node project를 firebase host에서 실행할 수 있도록 지원하는 클라우드
 
-## firebase 연동을 위해 tools 설치
-* firebase-tools : npm install -g firebase-tools
+## Firebase 연동을 위해 tools 설치
+* npm install -g firebase-tools
 
 ## Node.js에서 Firebase의 Realtime Database 연동
 * npm install firebase 또는 npm install firebase-admin
@@ -14,7 +14,7 @@
 ## 프로젝트 초기화
 * firebase 프로젝트 초기화 : firebase init
 
-## 프로젝트를 firebase 서버에 올리기
+## 프로젝트를 Firebase 서버에 올리기
 * firebase deploy
 
 ## 프로젝트 로컬에서 테스트하기(nodemon 대신 사용)
